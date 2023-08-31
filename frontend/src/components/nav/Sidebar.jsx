@@ -15,7 +15,7 @@ const Sidebar = () => {
         <li className="ps-3">
           <NavLink
             to="/dashboard/welcome"
-            className={(isActive) =>
+            className={({isActive}) =>
               isActive ? "sidebar-nav-avtive w-100" : ""
             }
           >
@@ -67,7 +67,7 @@ const Sidebar = () => {
         <li className="d-flex align-items-center ps-3">
           <NavLink
             to="/dashboard/create-employee"
-            className={(isActive) =>
+            className={({isActive}) =>
               isActive ? "sidebar-nav-avtive w-100" : ""
             }
           >

@@ -46,6 +46,18 @@ exports.list = async (req, res) => {
     const employees = await Employee.find({}).exec();
     res.json(employees);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json(err.message);
   }
 };
+
+
+exports.read = async(req, res)=>{
+  try {
+    const { email } = req.params
+    console.log('email', email)
+    const employee = await Employee.findOne({email}).exec()
+    res.json(employee)
+  } catch (err) {
+    res.status(400).json(err.message)
+  }
+}

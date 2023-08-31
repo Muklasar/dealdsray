@@ -42,7 +42,7 @@ const EmployeeForm = ({ employee, handleChange, handleSubmit }) => {
           Mobile No.
         </label>
         <input
-          type="Phone"
+          type="Number"
           name="mobile_no"
           onChange={handleChange}
           value={mobile_no}

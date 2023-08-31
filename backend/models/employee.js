@@ -21,7 +21,7 @@ const employeeSchema = mongoose.Schema({
   },
   designation: {
     type: String,
-    enum: ["HR", "Manger", "Sales"],
+    enum: ["HR", "Manager", "Sales"],
     required: ["Gender is required"],
   },
   gender: {

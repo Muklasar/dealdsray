@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Welcome from "./pages/Welcome";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UpdateEmployee from "./pages/employee/UpdateEmployee";
 
 // const Login = lazy("./pages/Login");
 // const Dashboard = lazy("./pages/Dashboard");
@@ -24,6 +25,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="welcome" element={<Welcome />} />
           <Route path="create-employee" element={<CreateEmployee />} />
+          <Route path="update-employee/:email" element={<UpdateEmployee />} />
           <Route path="employees" element={<Employees />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
