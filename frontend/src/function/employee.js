@@ -21,3 +21,10 @@ export const readEmployee = async (email) => {
     `${process.env.REACT_APP_API}/employee/${email}`
   );
 };
+
+export const listEmployee = async (email) => {
+  return await axios.get(
+    `${process.env.REACT_APP_API}/employees`
+  );
+};
+

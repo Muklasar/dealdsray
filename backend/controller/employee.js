@@ -11,7 +11,6 @@ exports.remove = async (req, res) => {
   }
 };
 
-
 exports.update = async (req, res) => {
   try {
     const { email } = req.params;
@@ -27,7 +26,7 @@ exports.update = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const { email } = req.body;
     const dublicateEmail = await Employee.findOne({ email });
     if (dublicateEmail) {
@@ -43,21 +42,37 @@ exports.create = async (req, res) => {
 
 exports.list = async (req, res) => {
   try {
-    const employees = await Employee.find({}).exec();
+    const employees = await Employee.find({})
+      .exec();
     res.json(employees);
   } catch (err) {
     res.status(400).json(err.message);
   }
 };
 
-
-exports.read = async(req, res)=>{
+exports.read = async (req, res) => {
   try {
-    const { email } = req.params
-    console.log('email', email)
-    const employee = await Employee.findOne({email}).exec()
-    res.json(employee)
+    const { email } = req.params;
+    console.log("email", email);
+    const employee = await Employee.findOne({ email }).exec();
+    res.json(employee);
   } catch (err) {
-    res.status(400).json(err.message)
+    res.status(400).json(err.message);
   }
-}
+};
+
+// search filter
+const handlerQuery = async (res, query) => {
+  const products = await Employee.find({ $text: { $search: query } }).exec();
+
+  res.json(products);
+};
+
+// serach filter
+exports.searchFilter = async (req, res) => {
+  const { query } = req.body;
+
+  if (query) {
+    await handlerQuery(res, query);
+  }
+};
