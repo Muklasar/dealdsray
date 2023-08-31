@@ -1,4 +1,5 @@
 # Node.js and NPM
+frontend/node_modules/
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -37,6 +38,7 @@ desktop.ini
 *.log
 
 # Dependency files
+frontend/package-lock.json
 package-lock.json
 yarn.lock
 

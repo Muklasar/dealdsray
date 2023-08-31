@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
+
 const app = express();
 
 // config env
@@ -21,6 +23,13 @@ app.use(bodyParser.json({ limit: "2mb" }));
 const employee = require("./router/employee");
 
 app.use("/api", employee);
+
+// frontend intergration
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+});
 
 // port
 const port = process.env.PORT || 8000;
