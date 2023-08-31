@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
+const cors = require('cors')
 
 const app = express();
 
@@ -18,6 +19,7 @@ mongoose
 
 // middleware
 app.use(bodyParser.json({ limit: "2mb" }));
+app.use(cors())
 
 // route
 const employee = require("./router/employee");

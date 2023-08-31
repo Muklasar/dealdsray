@@ -19,6 +19,11 @@ const employeeSchema = mongoose.Schema({
     type: Number,
     text: true,
   },
+  designation: {
+    type: String,
+    enum: ["HR", "Manger", "Sales"],
+    required: ["Gender is required"],
+  },
   gender: {
     type: String,
     enum: ["M", "F"],

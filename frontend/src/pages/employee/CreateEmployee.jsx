@@ -1,13 +1,15 @@
 import { useState } from "react";
 import EmployeeForm from "../../components/forms/EmployeeFrom";
+import { createEmployee } from "../../function/employee";
+import { toast } from "react-toastify";
 
 const intialState = {
-  name: "",
-  email: "",
-  mobile_no: "",
-  designation: "",
-  gender: "",
-  course: "",
+  name: "mukul",
+  email: "mukul@gmail.com",
+  mobile_no: "7278993253",
+  designation: "HR",
+  gender: "M",
+  course: "BCA",
 };
 
 const CreateEmployee = () => {
@@ -19,6 +21,15 @@ const CreateEmployee = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("employee", employee);
+    createEmployee(employee)
+      .then((res) => {
+        console.log("res", res.data);
+        toast.success(`${res.data.name} is created`)
+      })
+      .catch((err) => {
+        console.log("err", err.response.data)
+        toast.error(err.response.data)
+    });
   };
   return (
     <main id="main" class="main">

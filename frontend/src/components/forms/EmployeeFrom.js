@@ -1,6 +1,7 @@
 import { useState } from "react";
 const EmployeeForm = ({ employee, handleChange, handleSubmit }) => {
   const { name, email, mobile_no, designation, gender, course } = employee;
+
   return (
     <form onSubmit={handleSubmit}>
       <div class="mb-3">
@@ -77,6 +78,7 @@ const EmployeeForm = ({ employee, handleChange, handleSubmit }) => {
             name="gender"
             value="M"
             onChange={handleChange} 
+            checked={gender==='M'}
           />
           <label class="form-check-label" for="flexRadioDefault2">
             M
@@ -90,21 +92,24 @@ const EmployeeForm = ({ employee, handleChange, handleSubmit }) => {
             name="gender"
             value="F"
             onChange={handleChange} 
+            checked={gender==='F'}
           />
           <label class="form-check-label" for="inputGenderF">
             F
           </label>
         </div>
       </div>
-      {/* <div className="d-flex align-items-center mt-4">
+      <div className="d-flex align-items-center mt-4">
         <label>Course</label>
         <div class="form-check ms-5">
           <input
             class="form-check-input"
             type="checkbox"
-            value=""
             id="flexCheckDefault"
             name="course"
+            value="MCA"
+            checked={course==='MCA'}
+            onChange={handleChange}
           />
           <label class="form-check-label" for="flexCheckDefault">
             MCA
@@ -114,9 +119,11 @@ const EmployeeForm = ({ employee, handleChange, handleSubmit }) => {
           <input
             class="form-check-input"
             type="checkbox"
-            value=""
             id="flexCheckChecked"
             name="course"
+            value="BCA"
+            checked={course==='BCA'}
+            onChange={handleChange}
           />
           <label class="form-check-label" for="flexCheckChecked">
             BCA
@@ -126,15 +133,17 @@ const EmployeeForm = ({ employee, handleChange, handleSubmit }) => {
           <input
             class="form-check-input"
             type="checkbox"
-            value=""
             id="flexCheckChecked"
             name="course"
+            value="BSC"
+            checked={course==='BSC'}
+            onChange={handleChange}
           />
           <label class="form-check-label" for="flexCheckChecked">
             BSC
           </label>
         </div>
-      </div> */}
+      </div>
       <button type="submit" class="btn btn-primary mt-5">
         Submit
       </button>

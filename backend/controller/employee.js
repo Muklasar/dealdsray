@@ -27,6 +27,7 @@ exports.update = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
+    console.log(req.body)
     const { email } = req.body;
     const dublicateEmail = await Employee.findOne({ email });
     if (dublicateEmail) {
