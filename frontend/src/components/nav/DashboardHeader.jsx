@@ -1,6 +1,14 @@
 import message from "../../assets/img/messages-1.jpg";
+import defaultImage from '../../assets/img/defaultImage.jpg'
+import { useNavigate } from "react-router-dom";
+import '../../App.css'
 
 const DashboardHeader = () => {
+  const navigate = useNavigate()
+  const signOut = () =>{
+    localStorage.removeItem('email')
+    navigate('/login')
+  }
   return (
     <header id="header" className="header fixed-top d-flex align-items-center">
       <nav className="header-nav ms-auto">
@@ -20,10 +28,10 @@ const DashboardHeader = () => {
               data-bs-toggle="dropdown"
             >
               <div className="d-flex flex-column user pe-3">
-                <div className="user-name">John Deo</div>
+                <div className="user-name">Muklasar Rahaman</div>
                 <div className="user-role">Admin</div>
               </div>
-              <img src={message} alt="Profile" className="rounded-circle" />
+              <img src={defaultImage} alt="Profile" className="rounded-circle" />
             </a>
             {/* <!-- End Profile Iamge Icon --> */}
 
@@ -76,9 +84,9 @@ const DashboardHeader = () => {
               </li>
 
               <li>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center">
                   <i className="bi bi-box-arrow-right"></i>
-                  <span>Sign Out</span>
+                  <span onClick={signOut}>Sign Out</span>
                 </a>
               </li>
             </ul>
