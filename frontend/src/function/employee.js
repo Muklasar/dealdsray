@@ -28,3 +28,9 @@ export const listEmployee = async (email) => {
   );
 };
 
+
+export const removeEmployee = async (email) => {
+  return await axios.delete(
+    `${process.env.REACT_APP_API}/employee/${email}`
+  );
+};

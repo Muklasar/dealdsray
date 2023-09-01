@@ -3,6 +3,7 @@ import EmployeeForm from "../../components/forms/EmployeeFrom";
 import { createEmployee, readEmployee, updateEmployee } from "../../function/employee";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import UpdateFrom from "../../components/forms/UpdateFrom";
 
 const intialState = {
   name: "",
@@ -62,7 +63,7 @@ const UpdateEmployee = () => {
               <div class="card-body">
                 <div className="row ps-3 pe-2 mt-3">
                   <div className="col-12 p-1 pe-2 dashbord-news-card">
-                    <EmployeeForm
+                    <UpdateFrom
                       employee={employee}
                       handleChange={handleChange}
                       handleSubmit={handleSubmit}

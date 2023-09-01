@@ -42,7 +42,7 @@ exports.create = async (req, res) => {
 
 exports.list = async (req, res) => {
   try {
-    const employees = await Employee.find({})
+    const employees = await Employee.find({}).sort([['createdAt', 'desc']])
       .exec();
     res.json(employees);
   } catch (err) {

@@ -1,10 +1,25 @@
 import { useEffect, useState } from "react";
-import { listEmployee } from "../../function/employee";
+import { listEmployee, removeEmployee } from "../../function/employee";
 import LocalSearch from "../../components/forms/LocalSearch";
+import EmpTable from "../../components/table/EmpTable";
+import { toast } from "react-toastify";
 
 const Employees = () => {
   const [emplyees, setEmployees] = useState([]);
   const [keyword, setKeyword] = useState("");
+
+  const handleDelete = (email) => {
+    removeEmployee(email)
+      .then((res) => {
+        console.log(res.data);
+        const filterEmployee = emplyees.filter((emp) => emp.email != email);
+        setEmployees(filterEmployee);
+        toast.success("Emplyee deleted")
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   useEffect(() => {
     loadEmployees();
@@ -20,7 +35,8 @@ const Employees = () => {
       });
   };
   console.log("emplyees", emplyees);
-  const searchedName = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+  const searchedName = (keyword) => (c) =>
+    c.name.toLowerCase().includes(keyword);
   // const searchedEmail = (keyword) => (c) => c.email.toLowerCase().includes(keyword);
 
   return (
@@ -38,7 +54,7 @@ const Employees = () => {
               <div class="card-body">
                 <div className="row ps-3 pe-2 mt-3">
                   <div className="col-12 p-1 pe-2 dashbord-news-card">
-                    <table class="table">
+                    {/* <table class="table">
                       <thead>
                         <tr>
                           <th scope="col">Unique Id</th>
@@ -99,7 +115,8 @@ const Employees = () => {
                               </tr>
                             ))}
                       </tbody>
-                    </table>
+                    </table> */}
+                    <EmpTable data={emplyees.filter(searchedName)} handleDelete={handleDelete} />
                   </div>
                 </div>
               </div>
