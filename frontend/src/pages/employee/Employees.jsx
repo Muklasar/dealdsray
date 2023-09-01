@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-import { listEmployee, removeEmployee } from "../../function/employee";
+import {
+  listEmployee,
+  removeEmployee,
+  searchFilter,
+} from "../../function/employee";
 import LocalSearch from "../../components/forms/LocalSearch";
 import EmpTable from "../../components/table/EmpTable";
 import { toast } from "react-toastify";
+// import { searchFilter } from "../../../../backend/controller/employee";
 
 const Employees = () => {
   const [emplyees, setEmployees] = useState([]);
@@ -14,7 +19,7 @@ const Employees = () => {
         console.log(res.data);
         const filterEmployee = emplyees.filter((emp) => emp.email != email);
         setEmployees(filterEmployee);
-        toast.success("Emplyee deleted")
+        toast.success("Emplyee deleted");
       })
       .catch((err) => {
         console.log(err.message);
@@ -22,8 +27,22 @@ const Employees = () => {
   };
 
   useEffect(() => {
-    loadEmployees();
-  }, []);
+    if(keyword===''){
+      loadEmployees()
+    }
+    if (keyword) {
+      searchFilter(keyword)
+        .then((res) => {
+          console.log("serach res", res.data);
+          setEmployees(res.data)
+        })
+        .catch((err) => {
+          console.log("search err", err);
+        });
+      console.log("key", keyword);
+    }
+  }, [keyword]);
+
   const loadEmployees = () => {
     listEmployee()
       .then((res) => {
@@ -34,10 +53,6 @@ const Employees = () => {
         console.log(err);
       });
   };
-  console.log("emplyees", emplyees);
-  const searchedName = (keyword) => (c) =>
-    c.name.toLowerCase().includes(keyword);
-  // const searchedEmail = (keyword) => (c) => c.email.toLowerCase().includes(keyword);
 
   return (
     <main id="main" class="main">
@@ -116,7 +131,10 @@ const Employees = () => {
                             ))}
                       </tbody>
                     </table> */}
-                    <EmpTable data={emplyees.filter(searchedName)} handleDelete={handleDelete} />
+                    <EmpTable
+                      data={emplyees}
+                      handleDelete={handleDelete}
+                    />
                   </div>
                 </div>
               </div>

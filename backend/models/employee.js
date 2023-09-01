@@ -15,6 +15,7 @@ const employeeSchema = mongoose.Schema(
       required: true,
       unique: true,
       index: true,
+      text: true,
     },
     mobile_no: {
       type: Number,
@@ -24,6 +25,7 @@ const employeeSchema = mongoose.Schema(
       type: String,
       enum: ["HR", "Manager", "Sales"],
       required: ["Gender is required"],
+      text: true,
     },
     gender: {
       type: String,

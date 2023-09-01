@@ -63,15 +63,15 @@ exports.read = async (req, res) => {
 
 // search filter
 const handlerQuery = async (res, query) => {
-  const products = await Employee.find({ $text: { $search: query } }).exec();
-
-  res.json(products);
+  const employee = await Employee.find({ $text: { $search: query } }).exec();
+  console.log(employee)
+  res.json(employee);
 };
 
 // serach filter
 exports.searchFilter = async (req, res) => {
   const { query } = req.body;
-
+  console.log('query',query)
   if (query) {
     await handlerQuery(res, query);
   }

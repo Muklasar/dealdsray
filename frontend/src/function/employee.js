@@ -34,3 +34,10 @@ export const removeEmployee = async (email) => {
     `${process.env.REACT_APP_API}/employee/${email}`
   );
 };
+
+
+export const searchFilter = async (text) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/search-filter/${text}`, {query: text}
+  );
+};

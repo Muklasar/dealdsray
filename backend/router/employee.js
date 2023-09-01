@@ -9,6 +9,7 @@ const {
   update,
   read,
   remove,
+  searchFilter,
 } = require("../controller/employee");
 
 // employee route
@@ -17,5 +18,6 @@ router.get("/employee/:email", read);
 router.post("/employee", create);
 router.put("/employee/:email", update);
 router.delete("/employee/:email", remove);
+router.post("/search-filter/:query", searchFilter);
 
 module.exports = router;

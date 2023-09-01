@@ -1,8 +1,10 @@
 import React from "react";
 import { Image, Popconfirm, Table } from "antd";
 import { Link } from "react-router-dom";
+import defaultImage from '../../assets/img/defaultImage.jpg'
 
 const EmpTable = ({ data, handleDelete }) => {
+  const {designation} = data
   const columns = [
     {
       title: "Unique Id",
@@ -17,7 +19,7 @@ const EmpTable = ({ data, handleDelete }) => {
           {images.length > 0 ? (
             <Image width={50} src={images[0].url} />
           ) : (
-            <Image width={50} src="" />
+            <Image width={50} src={defaultImage} />
           )}
         </>
       ),
@@ -41,7 +43,7 @@ const EmpTable = ({ data, handleDelete }) => {
     },
     {
       title: "Designation",
-      dataIndex: "designation",
+      dataIndex: "designation"
     },
     {
       title: "Gender",
