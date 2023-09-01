@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import PageNotFound from "./pages/PageNotFound";
 import { Suspense, lazy } from "react";
 import Dashboard from "./pages/Dashboard";
@@ -17,10 +17,12 @@ import UpdateEmployee from "./pages/employee/UpdateEmployee";
 // const Employees = lazy("./pages/Employees");
 
 function App() {
+
   return (
     <>
       <ToastContainer />
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="welcome" element={<Welcome />} />

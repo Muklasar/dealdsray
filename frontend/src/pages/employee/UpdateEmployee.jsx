@@ -6,7 +6,7 @@ import {
   updateEmployee,
 } from "../../function/employee";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UpdateFrom from "../../components/forms/UpdateFrom";
 import FileUpload from "../../components/forms/FileUpload";
 
@@ -23,6 +23,7 @@ const intialState = {
 const UpdateEmployee = () => {
   const [employee, setEmployee] = useState(intialState);
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const { email } = useParams();
   console.log("update email", email);
@@ -52,6 +53,7 @@ const UpdateEmployee = () => {
       .then((res) => {
         console.log("res", res.data);
         toast.success(`employee is upadated`);
+        navigate('/dashboard/employees')
       })
       .catch((err) => {
         console.log("err", err.response.data);
