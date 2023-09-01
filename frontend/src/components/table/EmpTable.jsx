@@ -1,5 +1,5 @@
 import React from "react";
-import { Popconfirm, Table } from "antd";
+import { Image, Popconfirm, Table } from "antd";
 import { Link } from "react-router-dom";
 
 const EmpTable = ({ data, handleDelete }) => {
@@ -10,22 +10,21 @@ const EmpTable = ({ data, handleDelete }) => {
       sorter: (a, b) => a._id - b._id,
     },
     {
+      title: "Image",
+      dataIndex: "images",
+      render: (images) => (
+        <>
+          {images.length > 0 ? (
+            <Image width={50} src={images[0].url} />
+          ) : (
+            <Image width={50} src="" />
+          )}
+        </>
+      ),
+    },
+    {
       title: "Name",
       dataIndex: "name",
-      filters: [
-        {
-          text: "Joe",
-          value: "Joe",
-        },
-        {
-          text: "Category 1",
-          value: "Category 1",
-        },
-        {
-          text: "Category 2",
-          value: "Category 2",
-        },
-      ],
       filterMode: "tree",
       filterSearch: true,
       onFilter: (value, record) => record.name.startsWith(value),
@@ -56,6 +55,11 @@ const EmpTable = ({ data, handleDelete }) => {
       title: "Create date",
       dataIndex: "createdAt",
       sorter: (a, b) => a.createAt - b.createAt,
+      // render: (createAt) => {
+      //   const dateObject = new Date(createAt);
+      //   const datePart = dateObject.toISOString().split("T")[0];
+      //   return <>{datePart}</>;
+      // },
     },
     {
       title: "operation",
@@ -72,7 +76,9 @@ const EmpTable = ({ data, handleDelete }) => {
             title="Sure to delete?"
             onConfirm={() => handleDelete(email)}
           >
-            <a className="btn btn-sm text-center btn-primary w-100 mt-1">Delete</a>
+            <a className="btn btn-sm text-center btn-primary w-100 mt-1">
+              Delete
+            </a>
           </Popconfirm>
         </>
       ),
@@ -81,6 +87,13 @@ const EmpTable = ({ data, handleDelete }) => {
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
-  return <Table columns={columns} dataSource={data} onChange={onChange} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      onChange={onChange}
+      scroll={{ x: 1000 }}
+    />
+  );
 };
 export default EmpTable;

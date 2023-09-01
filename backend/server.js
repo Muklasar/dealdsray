@@ -23,8 +23,10 @@ app.use(cors())
 
 // route
 const employee = require("./router/employee");
+const cloudinary = require("./router/cloudinary");
 
 app.use("/api", employee);
+app.use("/api", cloudinary);
 
 // frontend intergration
 app.use(express.static(path.join(__dirname, "../frontend/build")));

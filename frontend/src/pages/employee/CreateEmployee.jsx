@@ -2,6 +2,8 @@ import { useState } from "react";
 import EmployeeForm from "../../components/forms/EmployeeFrom";
 import { createEmployee } from "../../function/employee";
 import { toast } from "react-toastify";
+import FileUpload from "../../components/forms/FileUpload";
+import { useNavigate } from "react-router-dom";
 
 const intialState = {
   name: "",
@@ -10,10 +12,13 @@ const intialState = {
   designation: "",
   gender: "",
   course: "",
+  images:[]
 };
 
 const CreateEmployee = () => {
   const [employee, setEmployee] = useState(intialState);
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
@@ -24,14 +29,16 @@ const CreateEmployee = () => {
     createEmployee(employee)
       .then((res) => {
         console.log("res", res.data);
-        toast.success(`${res.data.name} is created`)
+        toast.success(`employee has created`)
         setEmployee(intialState)
+        navigate('/dashboard/employees')
       })
       .catch((err) => {
         console.log("err", err.response.data)
         toast.error(err.response.data)
     });
   };
+  console.log('employee', employee)
   return (
     <main id="main" class="main">
       <div class="pagetitle">
@@ -45,6 +52,14 @@ const CreateEmployee = () => {
                 <div className="row ps-3 pe-2 mt-3">
                   <div className="col-12 p-1 pe-2 dashbord-news-card">
                     {/* {employee && employee.name && */}
+                    <div className="p-4">
+                        <FileUpload
+                            setValues={setEmployee}
+                            values={employee}
+                            loading={loading}
+                            setLoading={setLoading}
+                        />
+                    </div>
                     <EmployeeForm
                       employee={employee}
                       handleChange={handleChange}

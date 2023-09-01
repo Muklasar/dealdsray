@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import EmployeeForm from "../../components/forms/EmployeeFrom";
-import { createEmployee, readEmployee, updateEmployee } from "../../function/employee";
+import {
+  createEmployee,
+  readEmployee,
+  updateEmployee,
+} from "../../function/employee";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import UpdateFrom from "../../components/forms/UpdateFrom";
+import FileUpload from "../../components/forms/FileUpload";
 
 const intialState = {
   name: "",
@@ -12,28 +17,30 @@ const intialState = {
   designation: "",
   gender: "",
   course: "",
+  images: []
 };
 
 const UpdateEmployee = () => {
   const [employee, setEmployee] = useState(intialState);
+  const [loading, setLoading] = useState(false)
 
-  const {email} = useParams()
-  console.log('update email',email)
+  const { email } = useParams();
+  console.log("update email", email);
 
-  useEffect(()=>{
-    loadEmployee()
-  },[])
+  useEffect(() => {
+    loadEmployee();
+  }, []);
 
-  const loadEmployee = () =>{
+  const loadEmployee = () => {
     readEmployee(email)
-    .then(res=>{
-      console.log("update res",res)
-      setEmployee(res.data)
-    })
-    .catch(err=>{
-      console.log("update err",err)
-    })
-  }
+      .then((res) => {
+        console.log("update res", res);
+        setEmployee(res.data);
+      })
+      .catch((err) => {
+        console.log("update err", err);
+      });
+  };
 
   const handleChange = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
@@ -44,12 +51,12 @@ const UpdateEmployee = () => {
     updateEmployee(employee)
       .then((res) => {
         console.log("res", res.data);
-        toast.success(`${res.data.name} is upadate`)
+        toast.success(`employee is upadated`);
       })
       .catch((err) => {
-        console.log("err", err.response.data)
-        toast.error(err.response.data)
-    });
+        console.log("err", err.response.data);
+        toast.error(err.response.data);
+      });
   };
   return (
     <main id="main" class="main">
@@ -63,6 +70,14 @@ const UpdateEmployee = () => {
               <div class="card-body">
                 <div className="row ps-3 pe-2 mt-3">
                   <div className="col-12 p-1 pe-2 dashbord-news-card">
+                    <div className="p-4">
+                      <FileUpload
+                        setValues={setEmployee}
+                        values={employee}
+                        loading={loading}
+                        setLoading={setLoading}
+                      />
+                    </div>
                     <UpdateFrom
                       employee={employee}
                       handleChange={handleChange}

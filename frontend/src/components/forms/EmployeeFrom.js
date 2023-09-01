@@ -145,7 +145,7 @@ const EmployeeForm = ({ employee, handleChange, handleSubmit }) => {
         </div>
       </div>
       <button type="submit" class="btn btn-primary mt-5">
-        Submit
+        Save
       </button>
     </form>
   );

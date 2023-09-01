@@ -38,9 +38,8 @@ const employeeSchema = mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    image: {
-      type: String,
-      default: "",
+    images: {
+      type: Array,
     },
   },
   { timestamps: true }
